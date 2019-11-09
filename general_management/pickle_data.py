@@ -50,7 +50,10 @@ class db_handle(object):
                 if self.info[0] in self.employee_data:
                     data = self.employee_data[self.info[0]]
                     if data[2] == self.info[1]:
-                        return ("ok","Employee login successful")
+                        if data[3] == "admin":
+                            return ("ok","admin")
+                        else:
+                            return ("ok","Login Successful")
                     else:
                         return("err","Wrong Password")
                 else:
@@ -70,7 +73,7 @@ class db_handle(object):
             if empty_key:
                 return ("err","Error: Information can not be empty")
             else:
-                if self.info[0] in self.employee_data:
+                if self.info[0] in self.student_data:
                     data = self.student_data[self.info[0]]
                     if data[2] == self.info[1]:
                         return ("ok","Student login successful")
@@ -80,8 +83,35 @@ class db_handle(object):
                     return("err","Login ID does not exist")
 
 
-    def query(self,data=()):
-        pass
+    def query(self,id_num=""):
+        if id_num:
+            if id_num in self.employee_data:
+                return (1,self.employee_data[id_num])
+            elif id_num in self.student_data:
+                return (2,self.student_data[id_num])
+            else:
+                return False
+        else:
+            return (self.employee_data,self.student_data)
+
+    def delete(self,id_num):
+        if id_num in self.employee_data:
+            self.employee_data.pop(id_num)
+            return True
+        elif id_num in self.student_data:
+            self.student_data.pop(id_num)
+            return True
+        else:
+            return False
+
+    def add(self,id_num,data,mode=0):
+        if mode==1:
+            self.employee_data[id_num]=data
+        elif mode==2:
+            self.student_data[id_num]=data
+
+    def count(self):
+        return (len(self.employee_data), len(self.student_data))
 
 
 if __name__ == "__main__":
