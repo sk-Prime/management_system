@@ -27,7 +27,7 @@ class gui(tkinter.Frame):
         self.database= db_handle()
 
         self.id_auto = 1
-        self.id_length = 7
+        self.id_length = 5
         self.selected_id=""
 #-------------------gui------------------------------------------------------------
     def front_page(self):
