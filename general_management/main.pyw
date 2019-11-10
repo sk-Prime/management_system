@@ -304,7 +304,7 @@ class gui(tkinter.Frame):
                 values.append(e.get())
             if values:
                 self.database.delete(self.selected_id)
-                self.database.add(self.selected_id,values,t)
+                self.database.add(values,t)
                 messagebox.showinfo("Success","%s updated successfuly"%self.selected_id)
                 self.current_frame.destroy()
                 self.admin_page()

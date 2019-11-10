@@ -104,11 +104,11 @@ class db_handle(object):
         else:
             return False
 
-    def add(self,id_num,data,mode=0):
+    def add(self,data,mode=0):
         if mode==1:
-            self.employee_data[id_num]=data
+            self.employee_data[data[0]]=data
         elif mode==2:
-            self.student_data[id_num]=data
+            self.student_data[data[0]]=data
 
     def count(self):
         return (len(self.employee_data), len(self.student_data))
